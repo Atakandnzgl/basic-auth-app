@@ -1,4 +1,4 @@
-"user client";
+"use client";
 import {useState, type ChangeEvent, type FormEvent, } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
