@@ -1,36 +1,110 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+# 🔐 Basic Auth App  
+Minimal, modern ve tam işlevli bir **Authentication + Profile Management** uygulaması  
+Next.js 14, Prisma, NextAuth ve Tailwind ile geliştirilmiştir.
 
-First, run the development server:
+<br/>
+
+![Next.js Badge](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)
+![Prisma Badge](https://img.shields.io/badge/Prisma-ORM-2D3748?style=for-the-badge&logo=prisma)
+![NextAuth Badge](https://img.shields.io/badge/Auth-NextAuth-3C3C3C?style=for-the-badge&logo=auth0)
+![Tailwind Badge](https://img.shields.io/badge/TailwindCSS-3EBFF8?style=for-the-badge&logo=tailwindcss)
+![Typescript Badge](https://img.shields.io/badge/Typescript-blue?style=for-the-badge&logo=typescript)
+
+</div>
+
+---
+
+## 🌟 Özellikler
+
+- 👤 **Kayıt Olma (Register)**  
+- 🔑 **Giriş Yapma (Login) – NextAuth Credentials Provider**  
+- 🔒 **Korumalı Sayfa (Protected Route) – `/profile`**  
+- ✏️ **Profil Güncelleme (PUT /api/profile)**  
+- 🔐 **Session Yönetimi (JWT + Cookies – NextAuth otomatik yönetir)**  
+- 🎨 **Modern UI (Tailwind + Custom UI Components)**  
+- 🧱 **App Router + Server/Client bileşen yapısı**
+
+---
+
+## 🖼️ UI Önizleme
+
+> Buraya istersen ekran görüntüsü ekleyebilirsin.  
+> Örneğin:
+
+
+Eğer screenshot vermek istersen, ben sana modern auth ekran mockup’ı da üretebilirim.
+
+---
+
+## ⚙️ Teknolojiler
+
+| Teknoloji | Açıklama |
+|----------|----------|
+| **Next.js 14** | App Router, Server Components |
+| **NextAuth** | Credential tabanlı Auth |
+| **Prisma ORM** | Database modelleri + migrations |
+| **SQLite** | Lokal geliştirme DB |
+| **TailwindCSS** | UI utility framework |
+| **TypeScript** | Tip güvenliği |
+
+---
+
+## 📂 Proje Yapısı
 
 ```bash
+src/
+  app/
+    (auth)/
+      login/
+        page.tsx
+      register/
+        page.tsx
+      layout.tsx         # Ortak auth layout (UI upgrade)
+    profile/
+      page.tsx           # Protected + session check
+      ProfileForm.tsx    # Profil güncelleme formu (client)
+    api/
+      register/
+        route.ts         # POST /api/register
+      profile/
+        route.ts         # PUT /api/profile
+      auth/
+        [...nextauth]/
+          route.ts       # NextAuth endpoint
+  components/
+    ui/
+      button.tsx
+      input.tsx
+  lib/
+    auth.ts              # NextAuth config
+prisma/
+  schema.prisma
+.env
+🚀 Kurulum
+1️⃣ Repoyu klonla
+git@github.com:Atakandnzgl/basic-auth-app.git
+cd basic-auth-app
+2️⃣ Bağımlılıkları yükle
+npm install
+3️⃣ Environment dosyası oluştur
+DATABASE_URL="file:./dev.db"
+NEXTAUTH_SECRET="your-secret-key"
+NEXTAUTH_URL="http://localhost:3000"
+4️⃣ Prisma migrate
+npx prisma migrate dev --name init
+5️⃣ Geliştirme sunucusu
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🔌 API Endpoint'leri
+POST /api/register
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Kullanıcı oluşturur → bcrypt hash + email uniq kontrolü.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+POST /api/auth/[...nextauth]
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+NextAuth login/logout/session endpoint'i.
 
-## Learn More
+PUT /api/profile
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Giriş yapan kullanıcının profil adını günceller.
